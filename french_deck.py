@@ -1,8 +1,10 @@
 import collections
 from random import choice
 
+
 # creating a named tuple to represent a card
 Card = collections.namedtuple('Card', ['rank', 'suit'])
+
 
 # creating a class to represent a french deck of cards
 class FrenchDeck:
