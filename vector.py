@@ -10,7 +10,7 @@ class Vector:
     
     # returns string representation of an object for inspection
     # without this vector instances just show memory location
-    # implement __repr__ because python defaults to this instead of __str__
+    # implement __repr__ because python defaults to instead of __str__
     def __repr__(self):
         return f'Vector({self.x}, {self.y})'
 
