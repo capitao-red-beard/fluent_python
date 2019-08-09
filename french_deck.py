@@ -23,12 +23,12 @@ class FrenchDeck:
     def __getitem__(self, position):
         return self._cards[position]
 
-# create a namedtuple of the deck fo cards
+# create a namedtuple of the deck of cards
 beer_card = Card('7', 'diamonds')
 
 #  print the card we just created
 print(beer_card)
-
+p
 # initialise an object of FrenchDeck
 deck = FrenchDeck()
 
