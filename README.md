@@ -2,6 +2,13 @@
 
 This repository contains code I am writing whilst going through Luciano Ramalho's "Fluent Python" book.
 
-## Chapter 1 (The Python Data Model)
+## Part 1. Prologue
+
+### 1. The Python Data Model
 
 - `french_deck.py` a python class representing a french deck of cards, highlighting the power of Python.
+- `vector.py` a python class representing a vector, implementation of special methods.
+
+## Part 2. Data Structures
+
+### 2. An Array of Sequences
