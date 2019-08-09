@@ -4,7 +4,7 @@ from math import hypot
 class Vector:
 
     # initialise for a vector
-    def __init__(self, x-=, y=0):
+    def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
     
@@ -14,6 +14,7 @@ class Vector:
     def __repr__(self):
         return f'Vector({self.x}, {self.y})'
 
+    # returns the absolute value of our vector object
     def __abs__(self):
         return hypot(self.x, self.y)
 
@@ -32,3 +33,20 @@ class Vector:
     # implements "*" operator for objects of this class
     def __mul__(self, scalar):
         return Vector(self.x * scalar, self.y * scalar)
+
+# instatiate our vector object(s)
+v = Vector(5, 6)
+v2 = Vector(4, 5)
+
+# print a string representation of the vector obejct(s)
+print(v)
+print(v2)
+
+# perform addition on our vector objects
+print(v + v2)
+
+# perform a bool check on our vector object
+print(bool(v))
+
+# print the absolute value of our vector
+print(abs(v))
