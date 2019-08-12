@@ -12,3 +12,6 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ## Part 2. Data Structures
 
 ### 2. An Array of Sequences
+
+- `listcomps.py` a python code snippet used to visualise list comprehension in Python.
+- `gen_exps.py` a python code snippet showing how to use generator expressions.
