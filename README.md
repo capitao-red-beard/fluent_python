@@ -15,4 +15,4 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 
 - `listcomps.py` a python code snippet used to visualise list comprehension in Python.
 - `gen_exps.py` a python code snippet showing how to use generator expressions.
-- `tuples_lists.py` a python code snippet demonstrating the uses of tuples in Python.
+- `tuples_lists.py` a python code snippet demonstrating the uses of tuples and lists in Python.
