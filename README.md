@@ -16,3 +16,4 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 - `listcomps.py` a python code snippet used to visualise list comprehension in Python.
 - `gen_exps.py` a python code snippet showing how to use generator expressions.
 - `tuples_lists.py` a python code snippet demonstrating the uses of tuples and lists in Python.
+- `arrays_stacks_queues.py` a python code snippet demonstrating when to use arrays, stacks and queues, and why in Python.
