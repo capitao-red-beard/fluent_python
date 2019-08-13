@@ -6,14 +6,18 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 
 ### 1. The Python Data Model
 
-- `french_deck.py` a python class representing a french deck of cards, highlighting the power of Python.
-- `vector.py` a python class representing a vector, implementation of special methods.
+- `french_deck.py` a Python class representing a french deck of cards, highlighting the power of Python.
+- `vector.py` a Python class representing a vector, implementation of special methods.
 
 ## Part 2. Data Structures
 
 ### 2. An Array of Sequences
 
-- `listcomps.py` a python code snippet used to visualise list comprehension in Python.
-- `gen_exps.py` a python code snippet showing how to use generator expressions.
-- `tuples_lists.py` a python code snippet demonstrating the uses of tuples and lists in Python.
-- `arrays_queues.py` a python code snippet demonstrating when to use arrays and queues, and why in Python.
+- `listcomps.py` a Python code snippet used to visualise list comprehension in Python.
+- `gen_exps.py` a Python code snippet showing how to use generator expressions.
+- `tuples_lists.py` a Python code snippet demonstrating the uses of tuples and lists in Python.
+- `arrays_queues.py` a Python code snippet demonstrating when to use arrays and queues, and why in Python.
+
+### 3. Dictionaries and Sets
+
+- `dictionaries.py` a Python code snipper used to show some of the features of dictionaries in Python.
