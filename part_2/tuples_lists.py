@@ -1,5 +1,9 @@
 import os
 from collections import namedtuple, OrderedDict
+import dis
+import bisect
+import sys
+import random
 
 
 # Using tuples as records.
@@ -126,6 +130,7 @@ print(l[:2])
 # Splits at 3.
 print(l[:3])
 print(l[3:])
+
 # Slicing Objects.
 s = 'bicycle'
 # Every third value.
@@ -134,3 +139,111 @@ print(s[::3])
 print(s[::-1])
 # Reversed every other value.
 print(s[::-2])
+
+# Assinging to slices.
+l = list(range(10))
+print(l)
+l[2:5] = [20, 30]
+print(l)
+del l[5:7]
+print(l)
+l[3::2] = [11, 22]
+print(l)
+l[2:5] = [100]
+print(l)
+
+# Using + and * with sequence.
+# + and * always create new objects in memory.
+l = [1, 2, 3]
+print(l * 5)
+print(5 * 'abcd')
+
+# Building lists of lists.
+board = [['_'] * 3 for i in range(3)]
+print(board)
+board[1][2] = 'X'
+print(board)
+
+# Augmented assignment with sequences.
+# List.
+l = [1, 2, 3]
+print(id(l))
+l *= 2
+print(l)
+print(id(l))
+# Tuple.
+t = (1, 2, 3)
+print(id(t))
+t *= 2
+print(t)
+print(id(t))
+
+# Show byte code of the expression s[a] += b.
+print(dis.dis('s[a] += b'))
+
+# Do not put mutable objects inside tuples.
+# Augmented assignment is not an atomic operation.
+
+# Built-in sort functions.
+# Funct5ions or methods that change an object in-place should return 
+# None, to make it clear that the object was changed and that a new 
+# object was not created.
+fruits = ['grape', 'raspberry', 'apple', 'banana']
+# Produces a new list of strings sorted alphabetically.
+print(sorted(fruits))
+# Inspecting the original list we see it is unchanged.
+print(sorted(fruits, reverse=True))
+# Reverse alphabetical ordering.
+print(sorted(fruits, key=len))
+# A new list of strings sorted by length because "grape" and "apple" 
+# have length of 5 they remain in the same place.
+print(sorted(fruits, key=len, reverse=True))
+# Returns None because list is ordered in place.
+print(fruits.sort())
+
+# bisect uses the bisect and insort functions to binary search
+# and insert an item into any sorted sequence.
+HAYSTACK = [1, 4, 5, 6, 8, 12, 15, 20, 21, 23, 26, 29, 30]
+NEEDLES = [0, 1, 2, 5, 8, 10, 22, 23, 29, 30, 31]
+
+ROW_FMT = '{0:2d} @ {1:2d}    {2}{0:<2d}'
+
+def demo(bisect_fn):
+    for needle in reversed(NEEDLES):
+        # Use the bisect function to get the insertion point.
+        position = bisect_fn(HAYSTACK, needle)
+        # Build a pattern of vertical bars proportional to the offset.
+        offset = position * '  |'
+        # Print formatted row showing insertion point.
+        print(ROW_FMT.format(needle, position, offset))
+
+if __name__ == '__main__':
+    # Choose which bisect function to use accoring to the last command 
+    # line argument.
+    if sys.argv[-1] == 'left':
+        bisect_fn = bisect.bisect_left
+    else:
+        bisect_fn = bisect.bisect
+    
+    print('DEMO:', bisect_fn.__name__)
+    # Print header with name of function selected.
+    print('haystack ->', ' '.join('%2d' % n for n in HAYSTACK))
+    demo(bisect_fn)
+
+# Bisect can perform table lookups on numeric values.
+def grade(score, breakpoints=[60, 70, 80, 90], grades='FDCBA'):
+    i = bisect.bisect(breakpoints, score)
+    return grades[i]
+
+print([grade(score) for score in [33, 99, 77, 70, 89, 90, 100]])
+
+# Inserting with bisect.insort
+SIZE = 7
+
+random.seed(1729)
+
+my_list = []
+for i in range(SIZE):
+    new_item = random.randrange(SIZE * 2)
+    bisect.insort(my_list, new_item)
+    print('%2d ->' % new_item, my_list)
