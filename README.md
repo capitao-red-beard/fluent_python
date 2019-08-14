@@ -22,3 +22,7 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 
 - `dictionaries.py` a Python code snipper used to show some of the features of dictionaries in Python.
 - `sets.py` a Python code snippet to show some of the features of the widely under used set type.
+
+### 4. Text vs. Bytes
+
+- `text_vs_bytes.py` a Python code snippet to show the difference between text and bytes in Python.
