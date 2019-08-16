@@ -1,5 +1,8 @@
 import array
 import struct
+import os
+import sys
+import locale
 
 
 # Character issues.
@@ -77,3 +80,50 @@ octets.decode('koi8_r')
 octets.decode('utf_8', errors='replace')
 
 # Handling text files.
+fp = open('cafe.txt', 'w', encoding='utf_8')
+# open operates on the text mode and returns TextIOWrapper object.
+print(fp)
+# The write method on a TextIOWrapper returns the number of unicode 
+# characters written.
+print(fp.write('café'))
+fp.close()
+# os.stat reports that the file holds 5 bytes.
+print(os.stat('cafe.txt').st_size)
+# Opening a text file with no explicit encoding returns a TextIOWrapper 
+# with the encoding set to the system default.
+fp2 = open('cafe.txt')
+print(fp2)
+# Inspect the encoding default.
+print(fp2.encoding)
+print(fp2.read())
+# Opening the same file with the correct encoding.
+fp3 = open('cafe.txt', encoding='utf_8')
+print(fp3.read())
+# Opens a file for read in binary mode.
+fp4 = open('cafe.txt', 'rb')
+print(fp4)
+# Returns bytes as expected.
+print(fp4.read())
+
+# Encoding defaults: A madhouse.
+expressions = """
+        locale.getpreferredencoding()
+        type(my_file)
+        my_file.encoding
+        sys.stdout.isatty()
+        sys.stdout.encoding
+        sys.stdin.isatty()
+        sys.stdin.encoding
+        sys.stderr.isatty()
+        sys.stderr.encoding
+        sys.getdefaultencoding()
+        sys.getfilesystemencoding()"""
+
+my_file = open('dummy', 'w')
+
+for expression in expressions.split():
+    value = eval(expression)
+    print(expression.rjust(30), '->', repr(value))
+
+# I will come back to this chapter later as I do not feel it is so 
+# relevant to me right now.
