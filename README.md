@@ -26,3 +26,9 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 4. Text vs. Bytes
 
 - `text_vs_bytes.py` a Python code snippet to show the difference between text and bytes in Python.
+
+## Part 3. Functions as Objects
+
+### 5. First-Class Functions
+
+- `functions.py` a Python code snippet to show Python treating functions as objects, everything in Python is an object.
