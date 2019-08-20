@@ -51,3 +51,33 @@ print(sum(range(100)))
 
 # Anonymous functions.
 # Small, one-off functions.
+# lambda keyword creates an anonymous function within a Python 
+# expression.
+print(sorted(fruits, key=lambda word: word[::-1]))
+
+# The seven falvours of callable objects.
+
+# User-defined functrions: Created with def statements or lambda 
+# expressions.
+
+# Built-in functions: A function implemented in C, like len.
+
+# Built-in methods: Methods implemented in C, like dict.get.
+
+# Methods: Functions defined in the body of a class.
+
+# Classes: When invoked, a class runs its __new__ method to create an 
+# instance, then __init__ to initialise it, and finally the instance is 
+# returned to the caller. Because there is no new operator in Python, 
+# calling a class is like calling a function.
+
+# Class instances: If a class defines a __call__ method, then its 
+# instances may be invoked as functions.
+
+# Generator functions: Functions or methods that use the yield keyword. 
+# When called, generator functions return a generator object.
+
+# Test if an object is callable.
+print(callable(abs))
+print(callable(str))
+print(callable(13))
