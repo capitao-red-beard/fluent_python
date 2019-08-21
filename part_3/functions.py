@@ -1,5 +1,6 @@
 from functools import reduce
 from operator import add
+import random
 
 
 # Treating a function like an object.
@@ -81,3 +82,34 @@ print(sorted(fruits, key=lambda word: word[::-1]))
 print(callable(abs))
 print(callable(str))
 print(callable(13))
+
+
+# User-defined callable types.
+class BingoCage:
+
+    # Accepts any literal; building a local copy prevents unexpected 
+    # effects on any list passed in.
+    def __init__(self, items):
+        self._items = list(items)
+        # Shuffle garuanteed to work because _items is a list.
+        random.shuffle(self._items)
+    
+    # The main method.
+    def pick(self):
+        try:
+            return self._items.pop()
+        except IndexError:
+            # Raise custom exception method if _items is empty.
+            raise LookupError('Pick from empty BingoCage')
+    
+    # Shortcut to bingo.pick(): bingo().
+    def __call__(self):
+        return self.pick()
+
+
+bingo = BingoCage(range(3))
+print(bingo.pick())
+print(bingo())
+print(callable(bingo))
+
+# Function introspection.
