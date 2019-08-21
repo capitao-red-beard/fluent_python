@@ -113,3 +113,26 @@ print(bingo())
 print(callable(bingo))
 
 # Function introspection.
+print(dir(factorial))
+
+def upper_case_name(obj):
+    return f'{obj.first_name} {obj.last_name}'.upper()
+
+upper_case_name.short_description = 'Customer name'
+
+# Listing attributes of functions that don't exist in plain instances.
+# Create bare user defined class.
+class C: pass
+
+
+# Make an instance of the class.
+obj = C()
+
+# Create a bare function.
+def func(): pass
+
+# Using set differences, generate a sorted list of the attributes that 
+# exist in a function but not in an instance of a bare class.
+print(sorted(set(dir(func)) - set(dir(obj))))
+
+# From positional to keyword-only parameters.
