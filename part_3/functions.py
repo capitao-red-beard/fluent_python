@@ -3,6 +3,7 @@ from operator import add
 import random
 from inspect import signature
 import inspect
+from operator import mul
 
 
 # Treating a function like an object.
@@ -179,7 +180,7 @@ my_tag = {
 print(tag(**my_tag))
 
 # Retrieving information about parameters.
-def clip(text, max_len=80):
+def clip(text: str, max_len:'int > 0'=80) -> str:
     """ Return text clipped at the last space before or after max_len"""
     end = None
     if len(text) > max_len:
@@ -223,3 +224,16 @@ del my_tag['name']
 # mbound_args = sig.bind(**my_tag)
 
 # Function annotations.
+print(clip.__annotations__)
+print(sig.return_annotation)
+for param in sig.parameters.values():
+    note = repr(param.annotation).ljust(13)
+    print(note, ':', param.name, '=', param.default)
+
+# Packages for functional programming.
+# The operator module.
+def fact(n):
+    return reduce(lambda a, b: a*b, range(1, n+1))
+
+def fact(n):
+    return reduce(mul, range(1, n+1))
