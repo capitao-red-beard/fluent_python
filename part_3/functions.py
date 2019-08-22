@@ -1,6 +1,7 @@
 from functools import reduce
 from operator import add
 import random
+from inspect import signature
 
 
 # Treating a function like an object.
@@ -136,3 +137,73 @@ def func(): pass
 print(sorted(set(dir(func)) - set(dir(obj))))
 
 # From positional to keyword-only parameters.
+def tag(name, *content, cls=None, **attrs):
+    """Generate one or more HTML tags"""
+    if cls is not None:
+        attrs['class'] = cls
+    if attrs:
+        attr_str = ''.join(' %s="%s"' % (attr, value)
+                           for attr, value in sorted(attrs.items()))
+    else:
+        attr_str = ''
+    if content:
+        return '\n'.join('<%s%s>%s</%s>' % 
+                         (name, attr_str, c, name) for c in content)
+    else:
+        return '<%s%s />' % (name, attr_str)
+
+# A single positional argument produces an empty tag with that name. 
+print(tag('br'))
+# Any number of arguments after the first are captured by *content as a 
+# tuple.
+print(tag('p', 'hello'))
+print(tag('p', 'hello', 'world'))
+# Keyword arguments not explicitly named in then tag signature are 
+# captured by **attrs as a dict.
+print(tag('p', 'hello', id=33))
+# The cls parameter can only be passed as a keyword argument.
+print(tag('p', 'hello', 'world', cls='sidebar'))
+# Even the first positional argument can be passed as a keyword when 
+# tag is called.
+print(tag(content='testing', name='img'))
+my_tag = {
+    'name': 'img',
+    'title': 'Sunset Boulevard', 
+    'src': 'sunset.jpg', 
+    'cls': 'framed'
+    }
+# Prefixing the my_tag dict with ** passes all its items as separate 
+# arguments, which are then bound to the named parameters, with the 
+# remaning caught by **attrs.  
+print(tag(**my_tag))
+
+# Retrieving information about parameters.
+def clip(text, max_len=80):
+    """ Return text clipped at the last space before or after max_len"""
+    end = None
+    if len(text) > max_len:
+        space_before = text.rfind(' ', 0, max_len)
+        if space_before >= 0:
+            end = space_before
+        else:
+            space_after = text.rfind(' ', max_len)
+            if space_after >= 0:
+                end = space_after
+    if end is None: # No spaces were found.
+        end = len(text)
+    return text[:end].rstrip()
+
+# Returns the default parameter values of a function.
+print(clip.__defaults__)
+# Returns where the code exists.
+print(clip.__code__)
+# Returns a tuple of variables used in the function.
+print(clip.__code__.co_varnames)
+# Returns the number of arguments a function has.
+print(clip.__code__.co_argcount)
+
+sig = signature(clip)
+print(sig)
+
+for name, param in sig.parameters.items():
+    print(param.kind, ':', name, '=', param.default)
