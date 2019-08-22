@@ -2,6 +2,7 @@ from functools import reduce
 from operator import add
 import random
 from inspect import signature
+import inspect
 
 
 # Treating a function like an object.
@@ -207,3 +208,18 @@ print(sig)
 
 for name, param in sig.parameters.items():
     print(param.kind, ':', name, '=', param.default)
+
+sig = inspect.signature(tag)
+# Pass a dict of arguments to bind.
+bound_args = sig.bind(**my_tag)
+print(bound_args)
+# Iterate over the items in bound_args.arguments, which is an 
+# OrderedDict, to display the names and values of the arguments.
+for name, value in bound_args.arguments.items():
+    print(name, '=', value)
+# Remove the mandatory argument name from my_tag.
+del my_tag['name']
+# Throws error complaining of missing parameter name.
+# mbound_args = sig.bind(**my_tag)
+
+# Function annotations.
