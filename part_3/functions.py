@@ -3,7 +3,8 @@ from operator import add
 import random
 from inspect import signature
 import inspect
-from operator import mul
+from operator import mul, itemgetter, attrgetter, methodcaller
+from collections import namedtuple
 
 
 # Treating a function like an object.
@@ -237,3 +238,47 @@ def fact(n):
 
 def fact(n):
     return reduce(mul, range(1, n+1))
+
+metro_data = [
+    ('Tokyo', 'JP', 36.933, (35.689722, 139.691667)),
+    ('Delhi NCR', 'IN', 21.935, (28.613889, 77.208889)),
+    ('Mexico City', 'MX', 20.142, (19.433333, -99.133333)),
+    ('New York-Newark', 'US', 20.104, (40.808611, -74.020386)),
+    ('Sao Paolo', 'BR', 19.649, (-23.547778, -46.635833)),
+]
+
+for city in sorted(metro_data, key=itemgetter(1)):
+    print(city)
+
+cc_name = itemgetter(1, 0)
+for city in metro_data:
+    print(cc_name(city))
+
+# Use namedtuple to define LatLong.
+LatLong = namedtuple('LatLong', 'lat long')
+# Use namedtuple to define Metropolis.
+Metropolis = namedtuple('Metropolis', 'name cc pop coord')
+# Build metro_areas list with Metropolis instances; note the nested 
+# tuple unpacking to extract (lat, long) and use them to build the 
+# LatLong for the coord attribute of Metropolis.
+metro_areas = [Metropolis(name, cc, pop, LatLong(lat, long))
+               for name, cc, pop, (lat, long) in metro_data]
+print(metro_areas[0])
+# Reach into element metro_areas[0] to get its latitude.
+print(metro_areas[0].coord.lat)
+# Define a attrgetter to retrieve the name and the coord. lat nested 
+# attribute.
+name_lat = attrgetter('name', 'coord.lat')
+
+# Use attrgetter again to sort a list of cities by latitude.
+for city in sorted(metro_areas, key=attrgetter('coord.lat')):
+    # Use the attrgetter defined above to show only city name and lat.
+    print(name_lat(city))
+
+s = 'The time has come'
+upcase = methodcaller('upper')
+print(upcase(s))
+hiphenate = methodcaller('replace', ' ', '-')
+print(hiphenate(s))
+
+# Freezing arguments with functools.partial.
