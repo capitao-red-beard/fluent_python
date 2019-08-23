@@ -37,3 +37,7 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 
 - `design_patterns.py` a Python code snippet showing the design patters which can be used with first-class functions in Python.
 - `design_patterns_2.py` a Python code snippet showing the design patters which can be used with first-class functions in Python.
+
+### 7. Function Decorators and Closures
+
+- `decorators_101.py` a Python code snippet showing the behaviour and usefulness of decorators in the Python language.
