@@ -36,3 +36,4 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 6. Design Patterns with First-Class Functions
 
 - `design_patterns.py` a Python code snippet showing the design patters which can be used with first-class functions in Python.
+- `design_patterns_2.py` a Python code snippet showing the design patters which can be used with first-class functions in Python.

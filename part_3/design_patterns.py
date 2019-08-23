@@ -96,6 +96,3 @@ long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
 # Joe gets a 7% discount on the whole order because of LargeOrderPromo.
 print(Order(joe, long_order, LargeOrderPromo()))
 print(Order(ann, cart, LargeOrderPromo()))
-
-# Function-oriented strategy.
-
