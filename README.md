@@ -32,3 +32,7 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 5. First-Class Functions
 
 - `functions.py` a Python code snippet to show Python treating functions as objects, everything in Python is an object.
+
+### 6. Design Patterns with First-Class Functions
+
+- `design_patterns.py` a Python code snippet showing the design patters which can be used with first-class functions in Python.
