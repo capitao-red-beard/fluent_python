@@ -1,10 +1,12 @@
-from functools import reduce
-from operator import add
+from functools import reduce, partial
+from operator import add, mul
 import random
 from inspect import signature
 import inspect
 from operator import mul, itemgetter, attrgetter, methodcaller
 from collections import namedtuple
+import unicodedata
+import functools
 
 
 # Treating a function like an object.
@@ -282,3 +284,16 @@ hiphenate = methodcaller('replace', ' ', '-')
 print(hiphenate(s))
 
 # Freezing arguments with functools.partial.
+# Create a new triple function from mul.
+triple = partial(mul, 3)
+# Test it.
+print(triple(7))
+# Use triple with map; mul would not work with map in this example. 
+print(list(map(triple, range(1, 10))))
+
+nfc = functools.partial(unicodedata.normalize, 'NFC')
+s1 = 'café'
+s2 = 'cafe\u0301'
+print(s1, s2)
+print(s1 == s2)
+print(nfc(s1) == nfc(s2))
