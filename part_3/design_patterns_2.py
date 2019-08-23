@@ -1,4 +1,5 @@
 from collections import namedtuple
+from inspect import getmembers, isfunction
 
 
 # Function oriented strategy.
@@ -35,6 +36,10 @@ class Order:
             # To compute discount call the self.promotion function.
             discount = self.promotion(self)
         return self.total() - discount
+    
+    def __repr__(self):
+        fmt = '<Order total: {:.2f} due {:.2f}>'
+        return fmt.format(self.total(), self.due())
 
 
 # No abstract class.
@@ -79,3 +84,32 @@ long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
 # Joe gets a 7% discount on the whole order because of LargeOrderPromo.
 print(Order(joe, long_order, large_order_promo))
 print(Order(ann, cart, large_order_promo))
+
+# Finding strategies in a module.
+promos = [globals()[name] for name in globals()
+          if name.endswith('_promo')
+          and name != 'best_promo']
+
+def best_promo(order):
+    """Select the best discount available"""
+    return max(promo(order) for promo in promos)
+
+print(Order(joe, long_order, best_promo))
+print(Order(joe, banana_cart, best_promo))
+print(Order(ann, cart, best_promo))
+
+# Command.
+class MacroCommand:
+    """A command that executes a list of commands"""
+
+    # Building a list from the commands argument ensures that it is 
+    # iterable and keeps a local copy of the command references in each 
+    # MacroCommand instance.
+    def __init__(self, commands):
+        self.commands = list(commands)
+    
+    # When an instance of MacroCommand is invoked, each command in 
+    # self.commands is called in sequence.
+    def __call__(self):
+        for command in self.commands:
+            command()
