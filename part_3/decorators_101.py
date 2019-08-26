@@ -1,4 +1,8 @@
 import time
+import html
+from functools import singledispatch
+from collections import abc
+import numbers
 
 
 # Function decorators and closures.
@@ -156,5 +160,91 @@ def make_averager_2():
     
     return averager_2
 
-# Memorization with functools.lru_cache.
+# Generic functions with single dispatch.
+def htmlize(obj):
+    content = html.escape(repr(obj))
+    return f'<pre>{content}</pre>'
 
+print(htmlize({1, 2, 3}))
+print(htmlize(abs))
+print(htmlize('Heimlich & Co. \n- a game'))
+print(htmlize(42))
+print(htmlize(['alpha', 66, {3, 2, 1}]))
+
+# singleddispatch marks the base function which handles the object type.
+@singledispatch
+def htmlize(obj):
+    content = html.escape(repr(obj))
+    return f'<pre>{content}</pre>'
+
+# Each base function is decorated with @<<base_function>>.register
+# (<<type>>).
+@htmlize.register(str)
+def _(text):
+    content = html.escape(text).replace('\n', '<br>\n')
+    return '<p>{0}</p>'.format(content)
+
+# The name of the specialised functions is irrelevant; _ is a good 
+# choice to make this clear.
+# For each new type to receive special treatment, register a new 
+# function. numbers.Inegral is a virtual superclass of int.
+@htmlize.register(numbers.Integral)
+def _(n):
+    return '<pre>{0} (0x{0:x})</pre>'.format(n)
+
+# You can stack several register decorators to support different types 
+# with the same function.
+@htmlize.register(tuple)
+@htmlize.register(abc.MutableSequence)
+def _(seq):
+    inner = '</li>\n<li>'.join(htmlize(item) for item in seq)
+    return '<ul>\n<li>' + inner + '</li>\n</ul>'
+
+# Stacked decorators.
+"""
+@d1
+@d2
+def f():
+    print('f')
+"""
+# Is the same as.
+"""
+def f():
+    print('f')
+
+f = d1(d2(f))
+"""
+
+# A parameterized registration decorator.
+# registry is now a set so adding or removing is faster.
+registry = set()
+
+# register takes an optional keyword argument.
+# This is our decorator factory.
+def register(active=True):
+    # decorate is the actual decorator; takes function as argument.
+    def decorate(func):
+        print('running register(active=%s)->decorate(%s)' % (active, func))
+        # Register func only if the active argument is True.
+        if active:
+            # If not active and func in registry, remove it.
+            registry.add(func)
+        else:
+            registry.discard(func)
+        # Because decorate is a decorator it must return a function.
+        return func
+    return decorate
+
+# Must be invoked as a function, with the desired parameters.
+@register(active=False)
+def f1():
+    print('running f1()')
+
+@register()
+def f2():
+    print('running f2()')
+
+def f3():
+    print('running f3()')
+# The main point is, that register() returns decorate, which is then 
+# applied to the decorated function.
