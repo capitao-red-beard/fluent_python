@@ -41,3 +41,4 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 7. Function Decorators and Closures
 
 - `decorators_101.py` a Python code snippet showing the behaviour and usefulness of decorators in the Python language.
+- `clockdeco_demo.py` a Python code snippet shwoing an example of a decorator function in action.

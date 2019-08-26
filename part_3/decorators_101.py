@@ -1,3 +1,6 @@
+import time
+
+
 # Function decorators and closures.
 def deco(func):
     def inner():
@@ -93,3 +96,64 @@ def best_promo(order):
     return max(promo(order) for promo in promos)
 
 # Variable scope in Python.
+b = 6
+def f3(a):
+    global b
+    print(a)
+    print(b)
+    b = 9
+
+f3(3)
+print(b)
+
+
+# Closures.
+class Averager():
+
+    def __init__(self):
+        self.series = []
+
+    def __call__(self, new_value):
+        self.series.append(new_value)
+        total = sum(self.series)
+        return total / len(self.series)
+
+
+avg = Averager()
+print(avg(10))
+print(avg(11))
+print(avg(12))
+
+def make_averager():
+    series = []
+
+    def averager(new_value):
+        series.append(new_value)
+        total = sum(series)
+        return total / len(series)
+    
+    return averager
+
+avg = make_averager()
+print(avg(10))
+print(avg(11))
+print(avg(12))
+print(avg.__code__.co_varnames)
+print(avg.__code__.co_freevars)
+print(avg.__closure__)
+print(avg.__closure__[0].cell_contents)
+
+# The nonlocal declaration.
+def make_averager_2():
+    count = 0
+    total = 0
+
+    def averager_2(new_value):
+        nonlocal count, total
+        count += 1
+        total += new_value
+        return total / count
+    
+    return averager_2
+
+
