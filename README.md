@@ -42,3 +42,4 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 
 - `decorators_101.py` a Python code snippet showing the behaviour and usefulness of decorators in the Python language.
 - `clockdeco_demo.py` a Python code snippet shwoing an example of a decorator function in action.
+- `clockdeco2.py` a Python code snipper showing another default library decorator in action.

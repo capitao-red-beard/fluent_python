@@ -156,4 +156,5 @@ def make_averager_2():
     
     return averager_2
 
+# Memorization with functools.lru_cache.
 
