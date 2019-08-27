@@ -1,4 +1,5 @@
 import copy
+import weakref
 
 
 # Variables are not boxes.
@@ -156,3 +157,46 @@ print(bus2.passengers)
 print(bus2.passengers is bus3.passengers)
 # bus1 passengers is a distinct list.
 print(bus1.passengers)
+
+
+# Defensive programming with mutable parameters.
+class TwilightBus:
+    """ A bus that makes passengers vanish."""
+
+    def __init__(self, passengers=None):
+        if passengers is None:
+            self.passengers = []
+        else:
+            self.passengers = passengers
+    
+    def pick(self, name):
+        self.passengers.append(name)
+    
+    def drop(self, name):
+        self.passengers.remove(name)
+
+
+# In this example we are mutating the original list recieved as an 
+# argument.
+basketball_team = ['Sue', 'Tina', 'Maya', 'Diana', 'Pat']
+bus = TwilightBus(basketball_team)
+bus.drop('Tina')
+bus.drop('Pat')
+print(basketball_team)
+
+# del and garbage collection.
+s1 = {1, 2, 3}
+# s1 and s2 are aliases referring to the same set.
+s2 = s1
+def bye():
+    print('Gone with the wind...')
+# register the bye callback on the object referred by s1.
+ender = weakref.finalize(s1, bye)
+print(ender.alive)
+# del does not delete an object, just the reference to it.
+del s1
+print(ender.alive)
+# Rebinding the last reference, s2 makes {1, 2, 3} unreachable. It is 
+# destroyed, the bye callback is invoked, and ender.alive becomes False.
+s2 = 'spam'
+print(ender.alive)
