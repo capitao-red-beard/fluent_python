@@ -200,3 +200,42 @@ print(ender.alive)
 # destroyed, the bye callback is invoked, and ender.alive becomes False.
 s2 = 'spam'
 print(ender.alive)
+
+# Weak references.
+a_set = {0, 1}
+wref = weakref.ref(a_set)
+print(wref)
+print(wref())
+a_set = {2, 3, 4}
+print(wref())
+print(wref() is None)
+print(wref() is None)
+
+
+class Cheese:
+
+    def __init__(self, kind):
+        self.kind = kind
+    
+    def __repr__(self):
+        return f'Cheese{(self.kind)}'
+
+
+# stock is a WeakValueDictionary.
+stock = weakref.WeakValueDictionary()
+catalog = [Cheese('Red Leicester'), Cheese('Tilsit'), 
+           Cheese('Brie'), Cheese('Parmesan')]
+
+# The stock maps the name of the cheese to a weak reference to the 
+# cheese instance in the catalog.
+for cheese in catalog:
+    stock[cheese.kind] = cheese
+
+# The stock is complete.
+print(sorted(stock.keys()))
+del catalog
+# After the catalog is deleted, most cheeses are frone from the stock, 
+# as expected in WeakValueDictionary.
+print(sorted(stock.keys()))
+del cheese
+print(sorted(stock.keys()))

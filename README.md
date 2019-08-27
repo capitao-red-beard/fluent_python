@@ -49,3 +49,7 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 8. Object References, Mutability, and Recycling
 
 - `obj_ref_mut_recy.py` a Python code snippet showing some of the contents covered in this chapter.
+
+### 9. A Pythonic Object
+
+- `pythonic_object.py` a Python code snippet detailing pythnoc objects using coded examples.
