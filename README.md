@@ -52,4 +52,5 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 
 ### 9. A Pythonic Object
 
-- `vector2d_v0.py` a Python code snippet detailing Python objects using coded examples.
+- `vector2d_v0.py` a Python class detailing Python objects using coded examples.
+- `private_protected.py` a Python code snippet showing protected and private variables in Python.
