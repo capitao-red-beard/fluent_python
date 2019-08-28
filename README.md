@@ -52,4 +52,4 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 
 ### 9. A Pythonic Object
 
-- `pythonic_object.py` a Python code snippet detailing Python objects using coded examples.
+- `vector2d_v0.py` a Python code snippet detailing Python objects using coded examples.
