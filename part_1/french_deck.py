@@ -30,7 +30,7 @@ beer_card = Card('7', 'diamonds')
 
 # Print the card we just created.
 print(beer_card)
-p
+
 # Initialise an object of FrenchDeck.
 deck = FrenchDeck()
 
