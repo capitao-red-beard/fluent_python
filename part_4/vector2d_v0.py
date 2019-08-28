@@ -10,8 +10,23 @@ class Vector2d:
     def __init__(self, x, y):
         # converting x, y into float in init catches errors early, 
         # useful if Vector2d is called with incorrect arguments.
-        self.x = float(x)
-        self.y = float(y)
+        # Use exactly two underscores to make an attribute private.
+        self.__x = float(x)
+        self.__y = float(y)
+    
+    # The @property decorator marks the getter method of a property.
+    # The getter method is named after the public property it exposes.
+    @property
+    def x(self):
+        return self.__x
+    
+    @property
+    def y(self):
+        return self.__y
+    
+    # Hash method making our class hashable.
+    def __hash__(self):
+        return hash(self.x) ^ hash(self.y)
     
     # __iter__ makes a Vector2d iterable; this is what makes unpacking 
     # work (e.g. x, y = my_vector). We implement it simply by using a 
@@ -67,3 +82,38 @@ class Vector2d:
         # Unpack the memoryview resulting from the cast into the pair 
         # of arguments needed for the constructor.
         return cls(*memv)
+
+    def __format__(self, fmt_spec=''):
+        # If format ends with 'p' use polar coordinates.
+        if fmt_spec.endswith('p'):
+            # Remove 'p' suffix from fmt_spec.
+            fmt_spec = fmt_spec[:-1]
+            # Build tuple of polar coordinates: (magnitude, angle).
+            coords = (abs(self), self.angle())
+            # Configure outer format with angle brackets.
+            outer_fmt = '<{}, {}>'
+        else:
+            # Otherwise, use x, y components of self for rectangle 
+            # coordinates.
+            coords = self
+            # Configure outer format with parentheses.
+            outer_fmt = '({}, {})'
+        # Use the format built-in to apply the fmt_spec to each vector 
+        # component, building an iterable of formatted strings.
+        # Generate iterable with components as formatted strings.
+        components = (format(c, fmt_spec) for c in self)
+        # Plug the formatted strings into the outer format.
+        return outer_fmt.format(*components)
+    
+    def angle(self):
+        return math.atan2(self.y, self.x)
+
+
+v1 = Vector2d(3, 4)
+print(format(v1))
+print(format(Vector2d(1, 1), 'p'))
+print(format(Vector2d(1, 1), '.3ep'))
+print(format(Vector2d(1, 1), '0.5fp'))
+v2 = Vector2d(3.1, 4.2)
+print(hash(v1), hash(v2))
+print(set([v1, v2]))
