@@ -3,6 +3,10 @@ import math
 
 
 class Vector2d:
+    # Stores a tuple of instance attributes of the class, saving memory 
+    # this should be used for optimization and not for limiting users.
+    __slots__ = ('__x', '__y')
+
     # typecode is a class attribute we'll use when converting Vector2d 
     # instances to/from bytes.
     typecode = 'd'
