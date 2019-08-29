@@ -54,3 +54,5 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 
 - `vector2d_v0.py` a Python class detailing Python objects using coded examples.
 - `private_protected.py` a Python code snippet showing protected and private variables in Python.
+
+### 10. Sequence Hacking, Hashing, and Slicing
