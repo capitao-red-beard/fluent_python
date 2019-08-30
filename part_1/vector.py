@@ -1,5 +1,6 @@
 from math import hypot
 
+
 # Create our vector class.
 class Vector:
 
@@ -7,12 +8,12 @@ class Vector:
     def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
-    
+
     # Returns string representation of an object for inspection.
     # Without this vector instances just show memory location.
     # Implement __repr__ because python defaults to instead of __str__.
     def __repr__(self):
-        return f'Vector({self.x}, {self.y})'
+        return f"Vector({self.x}, {self.y})"
 
     # Returns the absolute value of our vector object.
     def __abs__(self):
@@ -29,10 +30,11 @@ class Vector:
         x = self.x + other.x
         y = self.y + other.y
         return Vector(x, y)
-    
+
     # Implements "*" operator for objects of this class.
     def __mul__(self, scalar):
         return Vector(self.x * scalar, self.y * scalar)
+
 
 # Instatiate our vector object(s).
 v = Vector(5, 6)

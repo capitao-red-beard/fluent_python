@@ -8,7 +8,7 @@ print(dumpd)
 # Default representation is 17 bytes long.
 print(len(dumpd))
 # Change the typecode to 'f' in instance v1.
-v1.typecode = 'f'
+v1.typecode = "f"
 dumpf = bytes(v1)
 print(dumpf)
 # Representation is now 9 bytes long.
