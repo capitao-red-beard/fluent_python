@@ -56,3 +56,5 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 - `private_protected.py` a Python code snippet showing protected and private variables in Python.
 
 ### 10. Sequence Hacking, Hashing, and Slicing
+
+- `10.py` a Python code snippet showcasing "sequence hacking, hashing and slicing" in Python.
