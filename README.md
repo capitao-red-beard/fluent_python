@@ -58,3 +58,7 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 10. Sequence Hacking, Hashing, and Slicing
 
 - `10.py` a Python code snippet showcasing "sequence hacking, hashing and slicing" in Python.
+
+### 11. Interfaces: From Protocols to ABCs
+
+- `interfaces_protocols.py` a Python code snippet covering some of the topics of this chapter.
