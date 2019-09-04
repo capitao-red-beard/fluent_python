@@ -66,4 +66,4 @@ def spades_high(card):
 
 # Returns a sorted deck of cards.
 for card in sorted(deck, key=spades_high):
-    print(card)
+    print(card[0])
