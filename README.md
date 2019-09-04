@@ -62,3 +62,7 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 11. Interfaces: From Protocols to ABCs
 
 - `interfaces_protocols.py` a Python code snippet covering some of the topics of this chapter.
+
+### 12. Inheritance: For Good or For Worse
+
+- `inheritance.py` a Python code snippet showing some of the inheritance features of Python.
