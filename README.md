@@ -66,3 +66,7 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 12. Inheritance: For Good or For Worse
 
 - `inheritance.py` a Python code snippet showing some of the inheritance features of Python.
+
+### 13. Operator Overloading: Doing It Right
+
+- `op_overloading.py` A python code snippet highlighting some of the operator overloading concepts in Python.
