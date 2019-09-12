@@ -70,3 +70,9 @@ This repository contains code I am writing whilst going through Luciano Ramalho'
 ### 13. Operator Overloading: Doing It Right
 
 - `op_overloading.py` A python code snippet highlighting some of the operator overloading concepts in Python.
+
+## Part 5. Control Flow
+
+### 14. Iterables, Iterators, and Generators
+
+- `sequences.py` A Python code snippet detailing some of the iteration specificities of Python.
